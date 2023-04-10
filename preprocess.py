@@ -84,16 +84,17 @@ else:
         ('CPU Usage', f'{n_workers}/{cpu_count()}')
     ])
 
-    pool = Pool(processes=n_workers)
-    dataset = []
+    if __name__ == '__main__':
+        pool = Pool(processes=n_workers)
+        dataset = []
 
-    for i, (item_id, length) in enumerate(pool.imap_unordered(process_wav, wav_files), 1):
-        dataset += [(item_id, length)]
-        bar = progbar(i, len(wav_files))
-        message = f'{bar} {i}/{len(wav_files)} '
-        stream(message)
+        for i, (item_id, length) in enumerate(pool.imap_unordered(process_wav, wav_files), 1):
+            dataset += [(item_id, length)]
+            bar = progbar(i, len(wav_files))
+            message = f'{bar} {i}/{len(wav_files)} '
+            stream(message)
 
-    with open(paths.data/'dataset.pkl', 'wb') as f:
-        pickle.dump(dataset, f)
+        with open(paths.data/'dataset.pkl', 'wb') as f:
+            pickle.dump(dataset, f)
 
-    print('\n\nCompleted. Ready to run "python train_tacotron.py" or "python train_wavernn.py". \n')
+        print('\n\nCompleted. Ready to run "python train_tacotron.py" or "python train_wavernn.py". \n')
