@@ -46,3 +46,11 @@ pip-delete-this-directory.txt
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*.pyt
+*.wav
+*.npy
+*.png
+*.csv
+*.pkl
+checkpoints/ljspeech_lsa_smooth_attention.tacotron/log.txt
+LJSpeech/README
